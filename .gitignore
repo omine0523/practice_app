@@ -26,6 +26,9 @@ replay_pid*
 # Maven / Spring Boot
 target/
 
+# env file
+.env
+
 # Eclipse
 .classpath
 .project
