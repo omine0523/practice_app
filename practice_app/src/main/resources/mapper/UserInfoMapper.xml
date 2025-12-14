@@ -3,19 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.reservation.mapper.UserInfoMapper">
+<mapper namespace="com.example.practiceapp.mapper.UserInfoMapper">
 	
-    <select id="getUser" parameterType="string" resultType="com.reservation.entity.UserInfo">
+    <select id="getUser" parameterType="java.lang.String" resultType="com.example.practiceapp.entity.UserInfo">
     	SELECT * FROM user_info WHERE user_id = #{userId}
     </select>
 	
-    <insert id="register" parameterType="com.reservation.entity.UserInfo">
-    </insert>
+    <!-- <insert id="register" parameterType="com.example.practiceapp.entity.UserInfo">
+    </insert> -->
     
-    <update id="" parameterType="">
-    </update>
+  <!--   <update id="" parameterType="">
+    </update> -->
 	
-    <delete id="" parameterType="">
-    </delete>
+   <!--  <delete id="" parameterType="">
+    </delete> -->
 
 </mapper>

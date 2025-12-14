@@ -8,6 +8,9 @@
 
 <body>
 	<h1>ログイン</h1>
+	<div th:if="${errorMsg}">
+		<p th:text="${errorMsg}"></p>
+	</div>
 	<form th:action="@{/login}" th:object="${loginForm}" method="post">
 		<div>
 			<label>ユーザーID： </label>
