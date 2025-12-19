@@ -5,6 +5,7 @@
 
 <mapper namespace="com.example.practiceapp.mapper.UserInfoMapper">
 	
+   <!-- ユーザー情報取得 userIdをキーとしてUserInfoテーブルから抽出-->
     <select id="getUser" parameterType="java.lang.String" resultType="com.example.practiceapp.entity.UserInfo">
     	SELECT * FROM user_info WHERE user_id = #{userId}
     </select>

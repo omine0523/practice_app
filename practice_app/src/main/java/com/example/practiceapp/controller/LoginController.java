@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +15,9 @@ import com.example.practiceapp.entity.UserInfo;
 import com.example.practiceapp.form.LoginForm;
 import com.example.practiceapp.service.UserInfoService;
 
-
+/*
+ * ログイン画面 コントローラーs
+ */
 @Controller
 public class LoginController {
 	
@@ -26,40 +27,42 @@ public class LoginController {
 	@Autowired
 	private UserInfoService userInfoService;
 
+	/*
+	 * 初期表示
+	 */
 	@GetMapping("/login")
 	public String showLogin(Model model) {
+		//フォームの初期化
 		model.addAttribute("loginForm", new LoginForm());
 		return "login";
 	}
 	
-	
+	/*
+	 * 登録ボタン押下時
+	 */
 	@PostMapping("/login")
 	public String submitLogin(@ModelAttribute LoginForm loginForm, Model model) {
-		//ブラウザ言語設定と同じ言語を取得
-		Locale locale = LocaleContextHolder.getLocale();
 		
-		// プロパティファイルからメッセージを取得
-		String userNotFound = messageSource.getMessage("login.error.usernotfound", null, locale);
-	    String invalid = messageSource.getMessage("login.error.invalid", null, locale);
-	    
-	    // ★ フォーム入力された userId を取得
+	    // フォームで入力された userId を取得
 	    String userId = loginForm.getUserId();
-	    // ServiceからUserInfoの情報を取得
+	    // userIdを元にServiceクラスのユーザー情報取得処理を呼び出す
 	    Optional<UserInfo> userOpt = userInfoService.findUser(userId);
 	    
-	    // ユーザーが存在しない場合
+	    // 取得した結果、ユーザーが存在しなかった場合、エラーメッセージを返却
 	    if (userOpt.isEmpty()) {
-	        model.addAttribute("errorMsg", userNotFound);
+	        model.addAttribute("errorMsg", messageSource.getMessage("login.error.usernotfound", null, Locale.JAPAN));
 	        return "login";
 	    }
-	    // Optional から中身を取り出す
+	    // Optionalの中にUserInfoが存在する場合、UserInfoオブジェクトを取り出す
 	    UserInfo loginUser = userOpt.get();
-
+	    
+        // フォームで入力されたパスワードとテーブルに登録されているパスワードを比較
 		if(loginForm.getPassword().equals(loginUser.getPassword())) {
-			return "redirect:/home"; // ログイン後の遷移先
+			// パスワードが一致している場合、ホーム画面に遷移
+			return "redirect:/home"; 
 		} else {
-			// ログイン失敗
-	        model.addAttribute("errorMsg", invalid);
+			// パスワードが不一致の場合、エラーメッセージを返却しログイン画面に戻す
+	        model.addAttribute("errorMsg", messageSource.getMessage("login.error.invalid", null, Locale.JAPAN));
 			return "login";
 		}
 	}

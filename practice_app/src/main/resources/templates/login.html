@@ -6,11 +6,14 @@
 	<title>ログイン</title>
 </head>
 
+<!-- ログイン画面template -->
 <body>
 	<h1>ログイン</h1>
 	<div th:if="${errorMsg}">
+		<!-- エラーがある場合 メッセージをcontrollerから受け取り表示 -->
 		<p th:text="${errorMsg}"></p>
 	</div>
+	<!-- フォーム情報 -->
 	<form th:action="@{/login}" th:object="${loginForm}" method="post">
 		<div>
 			<label>ユーザーID： </label>
@@ -20,6 +23,7 @@
 			<label>パスワード： </label>
 			<input type="password" th:field="*{password}" placeholder="英数字８桁以上で入力" />
 		</div>
+		<!-- フォーム内の情報をPost送信 -->
 		<button type="submit">登録</button>
 	</form>
 </body>
