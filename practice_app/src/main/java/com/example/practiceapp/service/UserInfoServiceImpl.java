@@ -9,7 +9,7 @@ import com.example.practiceapp.entity.UserInfo;
 import com.example.practiceapp.mapper.UserInfoMapper;
 /**
  * ログイン処理 実装クラス
- * ユーザーIDをもとにユーザー情報を取得し結果を返す
+ * ユーザーIDをもとに、ユーザー情報を取得する。
  */
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
