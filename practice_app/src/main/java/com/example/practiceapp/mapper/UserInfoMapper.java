@@ -13,8 +13,10 @@ import com.example.practiceapp.entity.UserInfo;
 @Mapper
 public interface UserInfoMapper {
 	/**
-     * userId を条件にユーザー情報を取得するselect文。
+     * ユーザーID を条件に完全一致するユーザー情報を取得する。
+     * @param userId ユーザー情報 ユーザーID
+     * @return 該当ユーザーがいない場合　
      */
-	 Optional<UserInfo> getUser (String userId);
+	 Optional<UserInfo> findUserByUserId (String userId);
 	 
 }

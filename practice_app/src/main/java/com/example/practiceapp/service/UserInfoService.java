@@ -15,5 +15,5 @@ public interface UserInfoService {
      * @param userId ユーザーID
      * @return ユーザー情報（存在しない場合はOptional.empty）
      */
-	 Optional<UserInfo> findUser(String userId);
+	 Optional<UserInfo> searchUser(String userId);
 }

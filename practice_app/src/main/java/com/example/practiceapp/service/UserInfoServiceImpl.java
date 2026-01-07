@@ -22,8 +22,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 	 * userIdをキーにMapperクラスのレコード取得結果を返却
 	 */
 	@Override
-	public Optional<UserInfo> findUser(String userId) {
-		return mapper.getUser(userId);
+	public Optional<UserInfo> searchUser(String userId) {
+		return mapper.findUserByUserId(userId);
 	}
 
 }

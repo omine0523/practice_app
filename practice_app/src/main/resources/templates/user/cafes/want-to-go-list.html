@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>行きたいカフェリスト</title>
+	<!-- style -->
+	<link rel="stylesheet" th:href="@{/css/cafes-list.css}">
+</head>
+
+<!-- 行きたいカフェリスト画面template -->
+<body>
+	<h2>行きたいカフェリスト</h2>
+	<!-- エラーがある場合 メッセージをcontrollerから受け取り表示 -->
+	<p th:if="${errorMsg}" th:text="${errorMsg}" class="error"></p>
+
+	<!-- フィルターエリア -->
+	<div class="filter-area">
+		<form>
+			<label>ジャンル：</label>
+			<select>
+				<option>-- 全て --</option>
+				<option>カフェ</option>
+				<option>喫茶店</option>
+				<option>コーヒー専門店</option>
+			</select>
+
+			<label>エリア：</label>
+			<select>
+				<option>-- 全て --</option>
+				<option>渋谷</option>
+				<option>新宿</option>
+				<option>池袋</option>
+			</select>
+
+			<label>キーワード：</label>
+			<input type="text" placeholder="店名など">
+
+			<button class="btn" type="submit">検索</button>
+		</form>
+	</div>
+
+	<!-- 新規登録画面へ遷移 -->
+	<br>
+	<a th:href="@{/register}" class="new-registration-btn">新規登録</a>
+	<br>
+	
+	<!-- カフェ一覧 -->
+	<table>
+		<thead>
+			<tr>
+				<th>店名</th>
+				<th>ジャンル</th>
+				<th>場所</th>
+				<th>メモ</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- ダミーデータ（後で th:each に置き換え） -->
+			<tr>
+				<td>カフェサンプル</td>
+				<td>カフェ</td>
+				<td>渋谷</td>
+				<td>落ち着いた雰囲気</td>
+				<td>
+					<a href="#">詳細</a> |
+					<a href="#">削除</a>
+				</td>
+			</tr>
+
+			<tr>
+				<td>コーヒーハウスABC</td>
+				<td>コーヒー専門店</td>
+				<td>新宿</td>
+				<td>豆が美味しい</td>
+				<td>
+					<a href="#">詳細</a> |
+					<a href="#">削除</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+
+</html>

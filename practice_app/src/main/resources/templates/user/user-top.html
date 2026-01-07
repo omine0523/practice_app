@@ -10,15 +10,15 @@
 
 <body>
 	<h2 th:text="'ようこそ ' + ${userName} + ' さん'">ようこそ 未設定さん</h2>
+	<!-- エラーがある場合 メッセージをcontrollerから受け取り表示 -->
+	<p th:text="${errorMsg}"></p>
+	
 	<h3>メニュー</h3>
 	<ul class="user_menu">
-		<!-- エラーがある場合 メッセージをcontrollerから受け取り表示 -->
-		<p th:text="${errorMsg}"></p>
-
-		<li><a href="/user/mypage">マイページ</a></li>
-		<li><a href="/user/ikitaitoko">行きたいとこリスト</a></li>
-		<li><a href="/user/ittatoko">過去行ったカフェリスト</a></li>
-		<li><a href="/user/logout">ログアウト</a></li>
+		<li><a th:href="@{/user/mypage}">マイページ</a></li>
+		<li><a th:href="@{/user/want-to-go-cafes}">行きたいカフェリスト</a></li>
+		<li><a th:href="@{/user/{userId}/visited-cafes(userId=${userId})}">過去に行ったカフェリスト</a></li>
+		<li><a th:href="@{/user/logout}">ログアウト</a></li>
 	</ul>
 </body>
 

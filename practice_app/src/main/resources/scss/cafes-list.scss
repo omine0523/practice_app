@@ -1,0 +1,18 @@
+@use "base.scss";
+@use "table.scss";
+@use "button.scss";
+
+.new-registration-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 10px;
+  background-color: #0d6efd;
+  text-decoration: none;
+  color: #ffffff;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.new-registration-btn:hover {
+  opacity: 0.8;
+}

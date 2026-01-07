@@ -18,7 +18,7 @@ import com.example.practiceapp.form.LoginForm;
 import com.example.practiceapp.service.UserInfoService;
 
 /*
- * ログイン画面 コントローラーs
+ * ログイン画面の処理を制御する controller
  */
 @Controller
 public class LoginController {
@@ -30,7 +30,7 @@ public class LoginController {
 	private UserInfoService userInfoService;
 
 	/*
-	 * 初期表示
+	 * ログイン画面の表示をする
 	 */
 	@GetMapping("/login")
 	public String showLogin(Model model) {
@@ -40,7 +40,7 @@ public class LoginController {
 	}
 
 	/*
-	 * 登録ボタン押下時
+	 * ログインボタン押下時の送信情報を判定する
 	 */
 	@PostMapping("/login")
 	public String submitLogin(@ModelAttribute LoginForm loginForm, Model model, HttpSession session) {
@@ -48,21 +48,21 @@ public class LoginController {
 		// フォームで入力された userId を取得
 		String userId = loginForm.getUserId();
 		// userIdを元にユーザー情報を取得
-		Optional<UserInfo> userOpt = userInfoService.findUser(userId);
+		Optional<UserInfo> userOpt = userInfoService.searchUser(userId);
 
 		// ユーザーが存在しなかった場合、エラーメッセージを返却しログイン画面に戻す
 		if (userOpt.isEmpty()) {
 			model.addAttribute("errorMsg", messageSource.getMessage("login.error.usernotfound", null, Locale.JAPAN));
 			return "login";
 		}
-		// Optionalの中にUserInfoが存在する場合、UserInfoオブジェクトを取得
+		// Optionalの中にUserInfoが存在する場合、UserInfoオブジェクトを取得する
 		UserInfo loginUser = userOpt.get();
 
-		// フォームで入力されたパスワードとテーブルに登録されているパスワードを比較
+		// フォームで入力されたパスワードとテーブルに登録されているパスワードを比較する
 		if (loginForm.getPassword().equals(loginUser.getPassword())) {
-			// パスワードが一致している場合、セッションにuserIdを保存
+			// パスワードが一致している場合、セッションにuserIdを保存する
 			session.setAttribute("userId", loginUser.getUserId());
-			// ホーム画面を表示
+			// ユーザートップ画面を表示する
 			return "redirect:/user-top";
 		} else {
 			// パスワードが不一致の場合、エラーメッセージを返却しログイン画面に戻す

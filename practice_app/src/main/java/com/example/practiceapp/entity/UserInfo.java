@@ -5,12 +5,13 @@ import lombok.Data;
 @Data
 public class UserInfo {
 	
-	private long id;
-
+	/** id */
+	private int userPk;
+	/** ユーザーID */
 	private String userId;
-
+	/** パスワード */
 	private String password;
-	
+	/** ユーザー名 */
 	private String userName;
 
 }
