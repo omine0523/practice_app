@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class UserInfo {
 	
-	/** id */
-	private int userPk;
+	/** id（主キー） */
+	private Integer userPk;
 	/** ユーザーID */
 	private String userId;
 	/** パスワード */

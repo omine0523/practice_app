@@ -9,6 +9,7 @@
 </head>
 
 <!-- 行きたいカフェリスト画面template -->
+
 <body>
 	<h2>行きたいカフェリスト</h2>
 	<!-- エラーがある場合 メッセージをcontrollerから受け取り表示 -->
@@ -19,18 +20,18 @@
 		<form>
 			<label>ジャンル：</label>
 			<select>
-				<option>-- 全て --</option>
-				<option>カフェ</option>
-				<option>喫茶店</option>
-				<option>コーヒー専門店</option>
+				<option value="">-- 全て --</option>
+				<option value="1">カフェ</option>
+				<option value="2">喫茶店</option>
+				<option value="3">コーヒー専門店</option>
 			</select>
 
 			<label>エリア：</label>
 			<select>
-				<option>-- 全て --</option>
-				<option>渋谷</option>
-				<option>新宿</option>
-				<option>池袋</option>
+				<option value="">-- 全て --</option>
+				<option value="1">渋谷</option>
+				<option value="2">新宿</option>
+				<option value="3">池袋</option>
 			</select>
 
 			<label>キーワード：</label>
@@ -44,36 +45,28 @@
 	<br>
 	<a th:href="@{/register}" class="new-registration-btn">新規登録</a>
 	<br>
-	
+
 	<!-- カフェ一覧 -->
 	<table>
 		<thead>
 			<tr>
 				<th>店名</th>
-				<th>ジャンル</th>
-				<th>場所</th>
+				<th>住所</th>
+				<th>エリア名</th>
+				<th>ジャンル名</th>
+				<th>ステータス</th>
 				<th>メモ</th>
 				<th>操作</th>
 			</tr>
 		</thead>
 		<tbody>
-			<!-- ダミーデータ（後で th:each に置き換え） -->
-			<tr>
-				<td>カフェサンプル</td>
-				<td>カフェ</td>
-				<td>渋谷</td>
-				<td>落ち着いた雰囲気</td>
-				<td>
-					<a href="#">詳細</a> |
-					<a href="#">削除</a>
-				</td>
-			</tr>
-
-			<tr>
-				<td>コーヒーハウスABC</td>
-				<td>コーヒー専門店</td>
-				<td>新宿</td>
-				<td>豆が美味しい</td>
+			<tr th:each="cafes : ${wantUserCafes}">
+				<td th:text="${cafes.storeName}">店名</td>
+				<td th:text="${cafes.address}">住所</td>
+				<td th:text="${cafes.areaName}">エリア名</td>
+				<td th:text="${cafes.genreName}">ジャンル名</td>
+				<td th:text="${cafes.status}">ステータス</td>
+				<td th:text="${cafes.memo}">メモ</td>
 				<td>
 					<a href="#">詳細</a> |
 					<a href="#">削除</a>

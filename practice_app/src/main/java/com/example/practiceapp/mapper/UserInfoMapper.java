@@ -3,6 +3,7 @@ package com.example.practiceapp.mapper;
 import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.example.practiceapp.entity.UserInfo;
 
@@ -17,6 +18,6 @@ public interface UserInfoMapper {
      * @param userId ユーザー情報 ユーザーID
      * @return 該当ユーザーがいない場合　
      */
-	 Optional<UserInfo> findUserByUserId (String userId);
+	 Optional<UserInfo> findUserByUserId (@Param("userId") String userId);
 	 
 }

@@ -4,10 +4,30 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.practiceapp.mapper.UserInfoMapper">
-	
+	<!-- ===== resultMap 定義 ===== -->
+	<!-- SQLの1行を WantUserCafeListDto オブジェクトにどう詰めるかを定義 -->
+	<resultMap id="wantUserCafeListMap"
+		type="com.example.practiceapp.entity.UserInfo">
+		<!-- ID（スネークケース → キャメルケースで設定） -->
+		<result property="userPk" column="id" />
+		<!-- ユーザーID -->
+		<result property="userId" column="user_id" />
+		<!-- パスワード（スネークケース → キャメルケースで設定） -->
+		<result property="password" column="password" />
+		<!-- ユーザー名（スネークケース → キャメルケースで設定） -->
+		<result property="userName" column="user_name" />
+	</resultMap>
    <!-- userIdをキーとしてUserInfoテーブルからユーザー情報取得する -->
-    <select id="findUserByUserId" parameterType="java.lang.String" resultType="com.example.practiceapp.entity.UserInfo">
-    	SELECT * FROM user_info WHERE user_id = #{userId}
+    <select id="findUserByUserId" parameterType="java.lang.String" resultMap="wantUserCafeListMap">
+    	SELECT 
+    		  id
+    		, user_id
+    		, password
+    		, user_name
+    	FROM 
+    		user_info
+    	WHERE 
+    		user_id = #{userId}
     </select>
 	
     <!-- <insert id="register" parameterType="com.example.practiceapp.entity.UserInfo">

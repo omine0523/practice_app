@@ -24,25 +24,24 @@
 		<result property="memo" column="memo" />
 	</resultMap>
 
-
 	<!-- ===== SELECT ===== -->
 	<!-- 共通SQLの部品化 カフェリスト取得 -->
 	<sql id="baseSelect">
 		SELECT
-			  store_name
-			, address
-			, area_name
-			, g.genre_name
-			, c.status
-			, c.memo
+			  user_cafes.store_name
+			, user_cafes.address
+			, cafes_area.area_name
+			, cafes_genre.genre_name
+			, user_cafes.status
+			, user_cafes.memo
 		FROM
 			user_cafes
-			INNER JOIN cafes_area a　ON c.fk_area_code = a.pk_area_code
-			INNER JOIN cafes_genre g　ON c.fk_genre_code = g.pk_genre_code
+			INNER JOIN cafes_area ON user_cafes.fk_area_code = cafes_area.pk_area_code
+			INNER JOIN cafes_genre ON user_cafes.fk_genre_code = cafes_genre.pk_genre_code
 	</sql>
 	<!-- 共通SQLの部品化 引数オブジェクトの userPk 指定のユーザーの一覧を取得 -->
 	<sql id="userPkCondition">
-		AND c.fk_user_id = #{userPk}
+		AND fk_user_id = #{userPk}
 	</sql>
 
 	<!-- 全件取得用 SELECT -->
@@ -70,12 +69,12 @@
 
 			<!-- 引数オブジェクトの areaCode が null でも、空文字でもない場合 検索条件に追加 -->
 			<if test="condition.areaCode != null and condition.areaCode != ''">
-				AND c.fk_area_code = #{condition.areaCode}
+				AND fk_area_code = #{condition.areaCode}
 			</if>
 			<!-- 引数オブジェクトの genreCode が null でも、空文字でもない場合 検索条件に追加 -->
 			<if
 				test="condition.genreCode != null and condition.genreCode != ''">
-				AND c.fk_genre_code = #{condition.genreCode}
+				AND fk_genre_code = #{condition.genreCode}
 			</if>
 		</where>
 	</select>

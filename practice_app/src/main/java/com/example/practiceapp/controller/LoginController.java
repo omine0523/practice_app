@@ -60,7 +60,8 @@ public class LoginController {
 
 		// フォームで入力されたパスワードとテーブルに登録されているパスワードを比較する
 		if (loginForm.getPassword().equals(loginUser.getPassword())) {
-			// パスワードが一致している場合、セッションにuserIdを保存する
+			// パスワードが一致している場合、セッションに id（主キー）と ユーザーID を保存する
+			session.setAttribute("userPk", loginUser.getUserPk());
 			session.setAttribute("userId", loginUser.getUserId());
 			// ユーザートップ画面を表示する
 			return "redirect:/user-top";
